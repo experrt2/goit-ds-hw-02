@@ -16,9 +16,10 @@ UPDATE tasks SET status_id = 2 WHERE user_id = 17
 --Отримати список користувачів, які не мають жодного завдання. Використайте комбінацію SELECT, WHERE NOT IN і підзапит.
 SELECT *
 FROM users
-WHERE NOT id in (SELECT user_id
-    FROM tasks
-    WHERE status_id)
+WHERE id NOT IN (
+	SELECT DISTINCT user_id
+	FROM tasks
+    )
 
 --Додати нове завдання для конкретного користувача. Використайте INSERT для додавання нового завдання.
 INSERT INTO tasks (title, description, status_id, user_id)
