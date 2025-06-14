@@ -4,11 +4,11 @@ FROM tasks t
 WHERE user_id = 14
 
 --Вибрати завдання за певним статусом. Використайте підзапит для вибору завдань з конкретним статусом, наприклад, 'new'.
-SELECT *
-FROM users
-WHERE id in (SELECT user_id
-    FROM tasks
-    WHERE status_id = 1)
+SELECT t.*
+FROM tasks t
+WHERE status_id in (SELECT id
+    FROM statuses
+    WHERE name = 'new')
 
 --Оновити статус конкретного завдання. Змініть статус конкретного завдання на 'in progress' або інший статус.
 UPDATE tasks SET status_id = 2 WHERE user_id = 17
@@ -27,7 +27,7 @@ VALUES ('bug', 'fghghfghf', 2, 4);
 --Отримати всі завдання, які ще не завершено. Виберіть завдання, чий статус не є 'завершено'.
 SELECT *
 FROM tasks
-WHERE status_id IS NOT 3
+WHERE status_id != 3
 
 --Видалити конкретне завдання. Використайте DELETE для видалення завдання за його id.
 DELETE FROM tasks WHERE id = 17
